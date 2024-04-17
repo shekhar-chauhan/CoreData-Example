@@ -7,18 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3870DF92BCFDCEB007DEEBA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3870DF82BCFDCEB007DEEBA /* DataController.swift */; };
 		D3A182C72BCFDB540064A54D /* CoreData_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A182C62BCFDB540064A54D /* CoreData_ExampleApp.swift */; };
 		D3A182C92BCFDB540064A54D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A182C82BCFDB540064A54D /* ContentView.swift */; };
 		D3A182CB2BCFDB540064A54D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A182CA2BCFDB540064A54D /* Assets.xcassets */; };
 		D3A182CE2BCFDB540064A54D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A182CD2BCFDB540064A54D /* Preview Assets.xcassets */; };
+		D3A182D72BCFDB980064A54D /* FoodModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3A182D52BCFDB980064A54D /* FoodModel.xcdatamodeld */; };
+		D3E3B9852BCFE029006FF26D /* AddWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E3B9842BCFE029006FF26D /* AddWaterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D3870DF82BCFDCEB007DEEBA /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		D3A182C32BCFDB540064A54D /* CoreData Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A182C62BCFDB540064A54D /* CoreData_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData_ExampleApp.swift; sourceTree = "<group>"; };
 		D3A182C82BCFDB540064A54D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D3A182CA2BCFDB540064A54D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3A182CD2BCFDB540064A54D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3A182D62BCFDB980064A54D /* FoodModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodModel.xcdatamodel; sourceTree = "<group>"; };
+		D3E3B9842BCFE029006FF26D /* AddWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWaterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +58,9 @@
 			isa = PBXGroup;
 			children = (
 				D3A182C62BCFDB540064A54D /* CoreData_ExampleApp.swift */,
-				D3A182C82BCFDB540064A54D /* ContentView.swift */,
+				D3E3B9812BCFDFE0006FF26D /* Helpers */,
+				D3E3B9802BCFDFD6006FF26D /* Views */,
+				D3A182D42BCFDB740064A54D /* DataModel */,
 				D3A182CA2BCFDB540064A54D /* Assets.xcassets */,
 				D3A182CC2BCFDB540064A54D /* Preview Content */,
 			);
@@ -65,6 +73,31 @@
 				D3A182CD2BCFDB540064A54D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D3A182D42BCFDB740064A54D /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				D3A182D52BCFDB980064A54D /* FoodModel.xcdatamodeld */,
+				D3870DF82BCFDCEB007DEEBA /* DataController.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		D3E3B9802BCFDFD6006FF26D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D3A182C82BCFDB540064A54D /* ContentView.swift */,
+				D3E3B9842BCFE029006FF26D /* AddWaterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D3E3B9812BCFDFE0006FF26D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +171,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A182C92BCFDB540064A54D /* ContentView.swift in Sources */,
+				D3870DF92BCFDCEB007DEEBA /* DataController.swift in Sources */,
 				D3A182C72BCFDB540064A54D /* CoreData_ExampleApp.swift in Sources */,
+				D3E3B9852BCFE029006FF26D /* AddWaterView.swift in Sources */,
+				D3A182D72BCFDB980064A54D /* FoodModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +380,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D3A182D52BCFDB980064A54D /* FoodModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D3A182D62BCFDB980064A54D /* FoodModel.xcdatamodel */,
+			);
+			currentVersion = D3A182D62BCFDB980064A54D /* FoodModel.xcdatamodel */;
+			path = FoodModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D3A182BB2BCFDB540064A54D /* Project object */;
 }
