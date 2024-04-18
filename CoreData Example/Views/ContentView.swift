@@ -73,8 +73,19 @@ struct ContentView: View {
     }
     
     private func totalWaterConsumedToday() -> Double {
-        return 0.0
+        let filteredEntities = waterCon.filter { waterEntity in
+            if let date = waterEntity.date {
+                return Calendar.current.isDateInToday(date)
+            }
+            return false
+        }
+        
+        // Calculate total water consumed today
+        let totalWaterConsumed = filteredEntities.reduce(0) { $0 + $1.waterConsumed }
+        
+        return totalWaterConsumed
     }
+
     
     //private let dateFormatter: DateFormatter = {
         //formatter.dateStyle = .medium
