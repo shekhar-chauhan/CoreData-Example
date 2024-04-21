@@ -65,11 +65,25 @@ struct ContentView: View {
                 AddWaterView()
             }
         }
+        .onAppear {
+            scheduleResetAtMidnight()
+        }
         // only for iPad sidebars -> .navigationViewStyle(.stack)
     }
     
     private func deleteWaterData(offsets: IndexSet) {
-        
+        // Delete selected water data
+        for offset in offsets {
+            let waterEntity = waterCon[offset]
+            managedObjContext2.delete(waterEntity)
+        }
+        //let dataController = DataController()
+        //dataController.addWaterDetails(waterConsumed: 0, dateConsumed: Date(), context: managedObjContext2)
+        do {
+            try managedObjContext2.save()
+        } catch {
+            print(error)
+        }
     }
     
     private func totalWaterConsumedToday() -> Double {
@@ -85,12 +99,71 @@ struct ContentView: View {
         
         return totalWaterConsumed
     }
-
     
-    //private let dateFormatter: DateFormatter = {
-        //formatter.dateStyle = .medium
-        //formatter.timeStyle = .medium
-    //}()
+    private func scheduleResetAtMidnight() {
+        let now = Date()
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.hour = 9
+        dateComponents.minute = 18
+        
+        guard let targetDate = calendar.nextDate(after: now, matching: dateComponents, matchingPolicy: .nextTime) else {
+                return
+        }
+        
+        let secondsUntil0820 = calendar.dateComponents([.second], from: now, to: targetDate).second ?? 0
+        
+        //let tomorrowMidnight = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: now)!)
+        //let secondsUntilMidnight = calendar.dateComponents([.second], from: now, to: tomorrowMidnight).second ?? 0
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(secondsUntil0820)) {
+            // Reset water consumed to 0
+            resetWaterConsumed()
+            // Reschedule for the next day
+            let waterConsumed = totalWaterConsumedToday()
+            let dataController = DataController()
+            dataController.addWaterDetails(waterConsumed: waterConsumed, dateConsumed: now, context: managedObjContext2)
+            print("func called 1")
+                    
+            self.scheduleResetAtMidnight()
+            
+            print("func called 2")
+        }
+    }
+    
+    private func resetWaterConsumed() {
+        // Fetch water entities for today
+        let filteredEntities = waterCon.filter { waterEntity in
+            if let date = waterEntity.date {
+                return Calendar.current.isDateInToday(date)
+            }
+            return false
+        }
+        
+        // Delete all water entities for today
+        for waterEntity in filteredEntities {
+            managedObjContext2.delete(waterEntity)
+        }
+        
+        // Save changes for deletion
+        do {
+            try managedObjContext2.save()
+        } catch {
+            print("Error deleting water entities: \(error)")
+        }
+        
+        // Add a new water entity with a water consumption of 0
+        let waterConsumed = 0.0
+        let dataController = DataController()
+        dataController.addWaterDetails(waterConsumed: waterConsumed, dateConsumed: Date(), context: managedObjContext2)
+        
+        // Save changes for addition
+        do {
+            try managedObjContext2.save()
+        } catch {
+            print("Error adding water entity: \(error)")
+        }
+    }    
 }
 
 struct ContentView_Previews: PreviewProvider {
